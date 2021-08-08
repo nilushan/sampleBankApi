@@ -9,4 +9,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" Version="3.1.17" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Controllers\Interfaces\" />
+    <None Remove="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\entities\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
 </Project>
