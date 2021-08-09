@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using miniBank3.Models;
 
 namespace miniBank3
 {
@@ -29,6 +31,10 @@ namespace miniBank3
         {
             //services.AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
             //    .AddAzureADB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
+
+            services.AddDbContext<DbTransactionContext>(opt => opt.UseInMemoryDatabase("Transactions"));
+            services.AddTransient<TransactionRepository, TransactionRepository>();
+
             services.AddControllers();
         }
 
