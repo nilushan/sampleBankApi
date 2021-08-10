@@ -7,10 +7,10 @@ namespace miniBank3.Models
     internal interface ITransactionRepository
 
     {
-        public Task<IEnumerable<ApiTransaction>> GetTransactionItems();
-        public Task<ApiTransaction> TransactionItem(string Id);
+        public Task<IEnumerable<ApiTransaction>> GetAllTransactionItems();
+        public Task<ApiTransaction> GetTransactionItem(string Id);
 
-        public Task<ApiTransaction> Add(ApiTransactionCreate apiTransaction);
+        public Task<ApiTransaction> AddTransactionItem(ApiTransactionCreate apiTransaction);
 
     }
 }

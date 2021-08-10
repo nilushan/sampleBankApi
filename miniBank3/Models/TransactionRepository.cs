@@ -6,17 +6,17 @@ using miniBank3.Controllers.entities;
 
 namespace miniBank3.Models
 {
-    public class TransactionRepository: ITransactionRepository
+    public class TransactionRepository : ITransactionRepository
     {
         private readonly DbTransactionContext _context;
-        public TransactionRepository( DbTransactionContext context)
+        public TransactionRepository(DbTransactionContext context)
         {
             _context = context;
         }
 
-        public async Task<ApiTransaction> Add(ApiTransactionCreate apiTransaction)
+        public async Task<ApiTransaction> AddTransactionItem(ApiTransactionCreate apiTransaction)
         {
-            Transaction newTransaction  = new Transaction
+            Transaction newTransaction = new Transaction
             {
                 Id = Guid.NewGuid().ToString(),
                 Date = DateTime.Now.ToUniversalTime(),
@@ -27,14 +27,23 @@ namespace miniBank3.Models
 
             };
 
-            _context.TransactionItems.Add(newTransaction);
-            await _context.SaveChangesAsync();
+            try
+            {
 
-            ApiTransaction createdTranaction = await this.TransactionItem(newTransaction.Id);
-            return createdTranaction;
+                _context.TransactionItems.Add(newTransaction);
+                await _context.SaveChangesAsync();
+
+                ApiTransaction createdTranaction = await this.GetTransactionItem(newTransaction.Id);
+                return createdTranaction;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
-        public async Task<IEnumerable<ApiTransaction> > GetTransactionItems()
+
+        public async Task<IEnumerable<ApiTransaction>> GetAllTransactionItems()
         {
 
             var dbTranactions = await _context.TransactionItems.ToListAsync();
@@ -50,23 +59,31 @@ namespace miniBank3.Models
                     Date = transactionItem.Date
                 }
                 )).ToArray();
-                
+
         }
 
-        public async Task<ApiTransaction> TransactionItem(string Id)
+        public async Task<ApiTransaction> GetTransactionItem(string Id)
         {
             var transactionItem = _context.TransactionItems.Find(Id);
 
-            ApiTransaction apiTranaction = new ApiTransaction
+
+            if (transactionItem != null)
             {
-                Id = transactionItem.Id,
-                FromAccount = transactionItem.FromAccount,
-                ToAccount = transactionItem.ToAccount,
-                Amount = transactionItem.Amount,
-                Description = transactionItem.Description,
-                Date = transactionItem.Date
-            };
-            return apiTranaction;
+                ApiTransaction apiTranaction = new ApiTransaction
+                {
+                    Id = transactionItem.Id,
+                    FromAccount = transactionItem.FromAccount,
+                    ToAccount = transactionItem.ToAccount,
+                    Amount = transactionItem.Amount,
+                    Description = transactionItem.Description,
+                    Date = transactionItem.Date
+                };
+                return apiTranaction;
+            }
+            else
+            {
+                return null;
+            }
         }
 
     }
