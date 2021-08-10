@@ -16,16 +16,7 @@ namespace miniBank3.Models
 
         public async Task<ApiTransaction> AddTransactionItem(ApiTransactionCreate apiTransaction)
         {
-            Transaction newTransaction = new Transaction
-            {
-                Id = Guid.NewGuid().ToString(),
-                Date = DateTime.Now.ToUniversalTime(),
-                Amount = apiTransaction.Amount,
-                FromAccount = apiTransaction.FromAccount,
-                ToAccount = apiTransaction.ToAccount,
-                Description = apiTransaction.Description
-
-            };
+            Transaction newTransaction = TransactionUtils.convertToDbTransactionType(apiTransaction);
 
             try
             {
@@ -40,6 +31,7 @@ namespace miniBank3.Models
             {
                 throw e;
             }
+
         }
 
 
@@ -85,6 +77,27 @@ namespace miniBank3.Models
                 return null;
             }
         }
+
+        public async Task<ApiTransaction> UpdateTransactionItem( string id, ApiTransactionUpdate apiTransactionUpdate)
+        {
+            var found = _context.TransactionItems.Find(id);
+
+            if( found == null)
+            {
+                return null; 
+            }
+
+            Transaction updatedTransaction = TransactionUtils.convertToDbTransactionType(apiTransactionUpdate);
+            var updated = TransactionUtils.copyExistingValues(found, updatedTransaction);
+
+            _context.TransactionItems.Update(updated);
+            await _context.SaveChangesAsync();
+
+            ApiTransaction createdTranaction = await this.GetTransactionItem(id);
+            return createdTranaction;
+
+        }
+
 
     }
 }

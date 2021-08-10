@@ -69,9 +69,21 @@ namespace miniBank3.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiTransaction>> Put(int id, [FromBody] ApiTransactionUpdate updateValues)
+        public async Task<ActionResult<ApiTransaction>> Put(string id, [FromBody] ApiTransactionUpdate updateValues)
         {
-            return NotFound();
+            //ApiTransactionUpdate updateData = updateValues;
+            //updateData.Id = id;
+
+            var ret = await _tranactionRepo.UpdateTransactionItem(id, updateValues);
+
+            if (ret == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return ret;
+            }
         }
 
         // DELETE api/values/5

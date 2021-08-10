@@ -19,7 +19,7 @@ namespace miniBank3.Controllers.entities
     public class ApiTransactionUpdate
     {
 
-        public string Id { get; }
+        //public string Id { get; set; }
         public string FromAccount { get; set; }
         public string ToAccount { get; set; }
         public string Description { get; set; }

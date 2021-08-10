@@ -11,6 +11,7 @@ namespace miniBank3.Models
         public Task<ApiTransaction> GetTransactionItem(string Id);
 
         public Task<ApiTransaction> AddTransactionItem(ApiTransactionCreate apiTransaction);
+        public Task<ApiTransaction> UpdateTransactionItem(string id, ApiTransactionUpdate apiTransactionUpdate);
 
     }
 }
