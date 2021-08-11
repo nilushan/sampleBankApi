@@ -5,6 +5,7 @@
     <UserSecretsId>aspnet-miniBank3-2682C24E-4676-4F0E-A846-6DA400590273</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'miniBank3' " />
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" Version="3.1.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.8" />

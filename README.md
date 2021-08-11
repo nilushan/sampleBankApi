@@ -1,7 +1,7 @@
 ﻿# Mini Bank
 
 ## To run
-- Open miniBank3.sln
+- Open miniBank.sln
 - Run the project
 
 ## Implementation steps
