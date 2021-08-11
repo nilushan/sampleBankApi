@@ -8,7 +8,7 @@ namespace miniBank3.Controllers.entities
         public string ToAccount { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
-        public string OwnerID { get; set; }
+        public ApiCustomer Owner { get; set; }
 
         public ApiTransactionCreate()
         {
@@ -24,7 +24,7 @@ namespace miniBank3.Controllers.entities
         public string ToAccount { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
-        public string OwnerID { get; set; }
+        public ApiCustomer Owner { get; set; }
     }
 }
 

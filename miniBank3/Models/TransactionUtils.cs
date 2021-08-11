@@ -15,7 +15,9 @@ namespace miniBank3.Models
                 Amount = apiTransaction.Amount,
                 FromAccount = apiTransaction.FromAccount,
                 ToAccount = apiTransaction.ToAccount,
-                Description = apiTransaction.Description
+                Description = apiTransaction.Description,
+                OwnerId = apiTransaction.Owner.Id,
+                OwnerName = apiTransaction.Owner.Name
 
             };
         }
@@ -28,7 +30,9 @@ namespace miniBank3.Models
                 Amount = apiTransaction.Amount,
                 FromAccount = apiTransaction.FromAccount,
                 ToAccount = apiTransaction.ToAccount,
-                Description = apiTransaction.Description
+                Description = apiTransaction.Description,
+                OwnerId = apiTransaction.Owner.Id,
+                OwnerName = apiTransaction.Owner.Name
 
             };
         }
@@ -39,17 +43,27 @@ namespace miniBank3.Models
             {
                 existing.Amount = updated.Amount;
             }
-            if( updated.FromAccount != null)
+            if (updated.FromAccount != null)
             {
                 existing.FromAccount = updated.FromAccount;
             }
-            if( updated.ToAccount != null)
+            if (updated.ToAccount != null)
             {
                 existing.ToAccount = updated.ToAccount;
             }
-            if(updated.Description != null)
+            if (updated.Description != null)
             {
                 existing.Description = updated.Description;
+            }
+
+            if (updated.OwnerId != null && updated.OwnerId != null)
+            {
+                existing.OwnerId = updated.OwnerId;
+            }
+
+            if (updated.OwnerName != null && updated.OwnerName != null)
+            {
+                existing.OwnerName = updated.OwnerName;
             }
 
             return existing;

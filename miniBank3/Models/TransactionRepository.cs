@@ -48,7 +48,12 @@ namespace miniBank3.Models
                     ToAccount = transactionItem.ToAccount,
                     Amount = transactionItem.Amount,
                     Description = transactionItem.Description,
-                    Date = transactionItem.Date
+                    Date = transactionItem.Date,
+                    Owner = new ApiCustomer
+                    {
+                        Id = transactionItem.OwnerId,
+                        Name = transactionItem.OwnerName
+                    }
                 }
                 )).ToArray();
 
@@ -68,7 +73,12 @@ namespace miniBank3.Models
                     ToAccount = transactionItem.ToAccount,
                     Amount = transactionItem.Amount,
                     Description = transactionItem.Description,
-                    Date = transactionItem.Date
+                    Date = transactionItem.Date,
+                    Owner = new ApiCustomer
+                    {
+                        Id = transactionItem.OwnerId,
+                        Name = transactionItem.OwnerName
+                    }
                 };
                 return apiTranaction;
             }
