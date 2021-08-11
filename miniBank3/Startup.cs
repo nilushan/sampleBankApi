@@ -32,10 +32,19 @@ namespace miniBank3
             //services.AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
             //    .AddAzureADB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
 
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
             services.AddDbContext<DbTransactionContext>(opt => opt.UseInMemoryDatabase("Transactions"));
             services.AddTransient<TransactionRepository, TransactionRepository>();
 
             services.AddControllers();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +61,7 @@ namespace miniBank3
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCors("AllowAnyOrigin");
 
             app.UseEndpoints(endpoints =>
             {
