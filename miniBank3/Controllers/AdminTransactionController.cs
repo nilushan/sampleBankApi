@@ -12,7 +12,7 @@ using miniBank3.Models;
 
 namespace miniBank3.Controllers
 {
-    [Route("api/admin/[controller]")]
+    [Route("api/transactions")]
     public class AdminTransactionController : ControllerBase
     {
         private readonly ITransactionRepository _tranactionRepo;
