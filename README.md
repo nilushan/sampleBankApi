@@ -4,10 +4,28 @@
 - Open miniBank.sln
 - Run the project
 
-Or using terminal
+Or using
+
 ```
 dotnet build
 dotnet run
 ```
 
 
+
+##Sample
+
+Create API call
+
+![Create API](/files/images/minibankApiCreate.png)
+
+
+
+Get API call
+
+![Create API](/files/images/minibankApiGet.png)
+
+
+Update API call
+
+![Create API](/files/images/minibankApiUpdate.png)
